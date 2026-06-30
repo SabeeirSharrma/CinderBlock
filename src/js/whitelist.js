@@ -1,6 +1,6 @@
 /*******************************************************************************
 
-    uBlock Origin - a comprehensive, efficient content blocker
+    CinderBlock - a content blocking engine for Ember Browser (based on uBlock Origin)
     Copyright (C) 2014-2018 Raymond Hill
 
     This program is free software: you can redistribute it and/or modify
@@ -219,23 +219,6 @@ async function applyChanges() {
 function revertChanges() {
     setEditorText(cachedWhitelist);
 }
-
-/******************************************************************************/
-
-function getCloudData() {
-    return getEditorText();
-}
-
-function setCloudData(data, append) {
-    if ( typeof data !== 'string' ) { return; }
-    if ( append ) {
-        data = uBlockDashboard.mergeNewLines(getEditorText().trim(), data);
-    }
-    setEditorText(data.trim());
-}
-
-self.cloud.onPush = getCloudData;
-self.cloud.onPull = setCloudData;
 
 /******************************************************************************/
 

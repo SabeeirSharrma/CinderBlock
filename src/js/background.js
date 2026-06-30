@@ -1,6 +1,6 @@
 /*******************************************************************************
 
-    uBlock Origin - a comprehensive, efficient content blocker
+    CinderBlock - a content blocking engine for Ember Browser (based on uBlock Origin)
     Copyright (C) 2014-present Raymond Hill
 
     This program is free software: you can redistribute it and/or modify
@@ -54,7 +54,7 @@ const hiddenSettingsDefault = {
     cacheStorageCompressionThreshold: 65536,
     cacheStorageMultithread: 2,
     cacheControlForFirefox1376932: 'unset',
-    cloudStorageCompression: true,
+    cloudStorageCompression: false,
     cnameIgnoreList: 'unset',
     cnameIgnore1stParty: true,
     cnameIgnoreExceptions: true,
@@ -101,7 +101,7 @@ const userSettingsDefault = {
     advancedUserEnabled: false,
     alwaysDetachLogger: true,
     autoUpdate: true,
-    cloudStorageEnabled: false,
+    cloudStorageEnabled: false, // CinderBlock: kept for compat, not used
     cnameUncloakEnabled: true,
     collapseBlocked: true,
     colorBlindFriendly: false,
@@ -161,7 +161,7 @@ const µBlock = {  // jshint ignore:line
 
     // Features detection.
     privacySettingsSupported: vAPI.browserSettings instanceof Object,
-    cloudStorageSupported: vAPI.cloud instanceof Object,
+    cloudStorageSupported: false, // CinderBlock: cloud sync removed
     canFilterResponseData: typeof browser.webRequest.filterResponseData === 'function',
 
     // https://github.com/chrisaljoudi/uBlock/issues/180

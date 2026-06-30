@@ -1,6 +1,6 @@
 /*******************************************************************************
 
-    uBlock Origin - a comprehensive, efficient content blocker
+    CinderBlock - a content blocking engine for Ember Browser (based on uBlock Origin)
     Copyright (C) 2014-present Raymond Hill
 
     This program is free software: you can redistribute it and/or modify
@@ -901,102 +901,10 @@ vAPI.messaging.listen({
 /******************************************************************************/
 
 // Channel:
-//      cloudWidget
+//      cloudWidget (removed in CinderBlock)
 //      privileged
 
-{
-// >>>>> start of local scope
-
-const fromBase64 = function(encoded) {
-    if ( typeof encoded !== 'string' ) {
-        return Promise.resolve(encoded);
-    }
-    let u8array;
-    try {
-        u8array = denseBase64.decode(encoded);
-    } catch {
-    }
-    return Promise.resolve(u8array !== undefined ? u8array : encoded);
-};
-
-const onMessage = function(request, sender, callback) {
-    // Cloud storage support is optional.
-    if ( µb.cloudStorageSupported !== true ) {
-        callback();
-        return;
-    }
-
-    // Async
-    switch ( request.what ) {
-    case 'cloudGetOptions':
-        vAPI.cloud.getOptions(function(options) {
-            options.enabled = µb.userSettings.cloudStorageEnabled === true;
-            callback(options);
-        });
-        return;
-
-    case 'cloudSetOptions':
-        vAPI.cloud.setOptions(request.options, callback);
-        return;
-
-    case 'cloudPull':
-        request.decode = encoded => {
-            if ( s14e.isSerialized(encoded) ) {
-                return s14e.deserializeAsync(encoded, { thread: true });
-            }
-            // Legacy decoding: needs to be kept around for the foreseeable future.
-            return lz4Codec.decode(encoded, fromBase64);
-        };
-        return vAPI.cloud.pull(request).then(result => {
-            callback(result);
-        });
-
-    case 'cloudPush':
-        request.encode = data => {
-            const options = {
-                compress: µb.hiddenSettings.cloudStorageCompression,
-                thread: true,
-            };
-            return s14e.serializeAsync(data, options);
-        };
-        return vAPI.cloud.push(request).then(result => {
-            callback(result);
-        });
-
-    case 'cloudUsed':
-        return vAPI.cloud.used(request.datakey).then(result => {
-            callback(result);
-        });
-
-    default:
-        break;
-    }
-
-    // Sync
-    let response;
-
-    switch ( request.what ) {
-    // For when cloud storage is disabled.
-    case 'cloudPull':
-        // fallthrough
-    case 'cloudPush':
-        break;
-
-    default:
-        return vAPI.messaging.UNHANDLED;
-    }
-
-    callback(response);
-};
-
-vAPI.messaging.listen({
-    name: 'cloudWidget',
-    listener: onMessage,
-    privileged: true,
-});
-
-// <<<<< end of local scope
-}
+// CinderBlock: cloud sync messaging removed
 
 /******************************************************************************/
 /******************************************************************************/

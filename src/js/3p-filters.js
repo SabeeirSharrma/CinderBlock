@@ -1,6 +1,6 @@
 /*******************************************************************************
 
-    uBlock Origin - a comprehensive, efficient content blocker
+    CinderBlock - a content blocking engine for Ember Browser (based on uBlock Origin)
     Copyright (C) 2014-present Raymond Hill
 
     This program is free software: you can redistribute it and/or modify
@@ -825,61 +825,9 @@ vAPI.localStorage.getItemAsync('expandedListSet').then(listkeys => {
 
 /******************************************************************************/
 
-// Cloud storage-related.
+/******************************************************************************/
 
-self.cloud.onPush = function toCloudData() {
-    const bin = {
-        parseCosmeticFilters: qs$('#parseCosmeticFilters').checked,
-        ignoreGenericCosmeticFilters: qs$('#ignoreGenericCosmeticFilters').checked,
-        selectedLists: []
-    };
-
-    const liEntries = qsa$('#lists .listEntry.checked[data-role="leaf"]');
-    for ( const liEntry of liEntries ) {
-        bin.selectedLists.push(liEntry.dataset.key);
-    }
-
-    return bin;
-};
-
-self.cloud.onPull = function fromCloudData(data, append) {
-    if ( typeof data !== 'object' || data === null ) { return; }
-
-    let elem = qs$('#parseCosmeticFilters');
-    let checked = data.parseCosmeticFilters === true || append && elem.checked;
-    elem.checked = listsetDetails.parseCosmeticFilters = checked;
-
-    elem = qs$('#ignoreGenericCosmeticFilters');
-    checked = data.ignoreGenericCosmeticFilters === true || append && elem.checked;
-    elem.checked = listsetDetails.ignoreGenericCosmeticFilters = checked;
-
-    const selectedSet = new Set(data.selectedLists);
-    for ( const listEntry of qsa$('#lists .listEntry[data-role="leaf"]') ) {
-        const listkey = listEntry.dataset.key;
-        const mustEnable = selectedSet.has(listkey);
-        selectedSet.delete(listkey);
-        if ( mustEnable === false && append ) { continue; }
-        toggleFilterList(listEntry, mustEnable);
-    }
-
-    // If there are URL-like list keys left in the selected set, import them.
-    for ( const listkey of selectedSet ) {
-        if ( reValidExternalList.test(listkey) ) { continue; }
-        selectedSet.delete(listkey);
-    }
-    if ( selectedSet.size !== 0 ) {
-        const textarea = qs$('#lists .listEntry[data-role="import"] textarea');
-        const lines = append
-            ? textarea.value.split(/[\n\r]+/)
-            : [];
-        lines.push(...selectedSet);
-        if ( lines.length !== 0 ) { lines.push(''); }
-        textarea.value = lines.join('\n');
-        dom.cl.toggle('#lists .listEntry[data-role="import"]', 'expanded', textarea.value !== '');
-    }
-
-    renderWidgets();
-};
+// Cloud storage-related removed in CinderBlock.
 
 /******************************************************************************/
 

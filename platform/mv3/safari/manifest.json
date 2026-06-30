@@ -3,7 +3,7 @@
     "default_icon": "/img/icon_64.png",
     "default_popup": "popup.html"
   },
-  "author": "Raymond Hill",
+  "author": "The Cinder Project",
   "background": {
     "scripts": [ "/js/background.js" ],
     "type": "module",
@@ -36,7 +36,7 @@
     "512": "/img/icon_512.png"
   },
   "manifest_version": 3,
-  "name": "__MSG_extName__",
+  "name": "CinderBlock",
   "options_ui": {
     "page": "dashboard.html"
   },
@@ -52,40 +52,6 @@
     "storage",
     "unlimitedStorage"
   ],
-  "short_name": "uBO Lite",
-  "version": "1.0",
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "strictblock.html"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
-    },
-    {
-      "resources": [
-        "zapper-ui.html"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
-    },
-    {
-      "resources": [
-        "picker-ui.html"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
-    },
-    {
-      "resources": [
-        "unpicker-ui.html"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
-    }
-  ]
+  "short_name": "CinderBlock",
+  "version": "0.1.0"
 }

@@ -3,13 +3,7 @@
 		"content": "internal",
 		"updateAfter": 13,
 		"contentURL": [
-			"https://raw.githubusercontent.com/gorhill/uBlock/master/assets/assets.json",
 			"assets/assets.json"
-		],
-		"cdnURLs": [
-			"https://ublockorigin.github.io/uAssetsCDN/ublock/assets.json",
-			"https://ublockorigin.pages.dev/ublock/assets.json",
-			"https://cdn.jsdelivr.net/gh/gorhill/uBlock@master/assets/assets.json"
 		]
 	},
 	"public_suffix_list.dat": {
@@ -165,7 +159,7 @@
 		"off": true,
 		"title": "AdGuard – Ads",
 		"tags": "ads",
-		"contentURL": "https://filters.adtidy.org/extension/ublock/filters/2_without_easylist.txt",
+		"contentURL": "https://filters.adtidy.org/extension/ublock/filters/2.txt",
 		"supportURL": "https://github.com/AdguardTeam/AdguardFilters#adguard-filters"
 	},
 	"adguard-mobile": {
@@ -966,5 +960,103 @@
 		"lang": "vi",
 		"contentURL": "https://raw.githubusercontent.com/abpvn/abpvn/master/filter/abpvn_ublock.txt",
 		"supportURL": "https://abpvn.com/"
+	},
+	"adguard-base": {
+		"content": "filters",
+		"group": "ads",
+		"title": "AdGuard Base",
+		"tags": "ads",
+		"contentURL": "https://filters.adtidy.org/extension/ublock/filters/2.txt",
+		"supportURL": "https://github.com/AdguardTeam/AdguardFilters#adguard-filters"
+	},
+	"adguard-tracking-protection": {
+		"content": "filters",
+		"group": "privacy",
+		"title": "AdGuard Tracking Protection",
+		"tags": "privacy",
+		"contentURL": "https://filters.adtidy.org/extension/ublock/filters/3.txt",
+		"supportURL": "https://github.com/AdguardTeam/AdguardFilters#adguard-filters"
+	},
+	"adguard-annoyances": {
+		"content": "filters",
+		"group": "annoyances",
+		"title": "AdGuard Annoyances",
+		"tags": "annoyances",
+		"contentURL": "https://filters.adtidy.org/extension/ublock/filters/14.txt",
+		"supportURL": "https://github.com/AdguardTeam/AdguardFilters#adguard-filters"
+	},
+	"ubo-filters": {
+		"content": "filters",
+		"group": "default",
+		"title": "uBlock Origin Filters",
+		"tags": "ads",
+		"contentURL": "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt",
+		"supportURL": "https://github.com/uBlockOrigin/uAssets"
+	},
+	"ubo-annoyances": {
+		"content": "filters",
+		"group": "annoyances",
+		"title": "uBlock Annoyances",
+		"tags": "annoyances",
+		"contentURL": "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances.txt",
+		"supportURL": "https://github.com/uBlockOrigin/uAssets"
+	},
+	"dan-pollock-hosts": {
+		"content": "filters",
+		"group": "malware",
+		"title": "Dan Pollock's hosts",
+		"tags": "malware spam",
+		"contentURL": "https://someonewhocares.org/hosts/zero/hosts",
+		"supportURL": "https://someonewhocares.org/hosts/"
+	},
+	"phishtank": {
+		"content": "filters",
+		"group": "malware",
+		"title": "PhishTank",
+		"tags": "phishing",
+		"contentURL": "https://phishtank.org/phishtank.txt",
+		"supportURL": "https://phishtank.org/"
+	},
+	"hagezi-multi-pro": {
+		"content": "filters",
+		"group": "default",
+		"title": "HAGEZI Multi Pro",
+		"tags": "ads tracking malware",
+		"contentURL": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt",
+		"supportURL": "https://github.com/hagezi/dns-blocklists"
+	},
+	"stevenblack-adware-malware": {
+		"content": "filters",
+		"group": "malware",
+		"title": "StevenBlack Adware + Malware",
+		"tags": "adware malware",
+		"contentURL": "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/adware-malware/hosts",
+		"supportURL": "https://github.com/StevenBlack/hosts"
+	},
+	"oisd-big": {
+		"content": "filters",
+		"group": "default",
+		"title": "oisd big",
+		"tags": "comprehensive",
+		"contentURL": "https://big.oisd.nl",
+		"supportURL": "https://oisd.nl/"
+	},
+	"stevenblack-gambling": {
+		"content": "filters",
+		"group": "custom",
+		"off": true,
+		"title": "StevenBlack Gambling",
+		"tags": "gambling",
+		"contentURL": "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling/hosts",
+		"supportURL": "https://github.com/StevenBlack/hosts"
+	},
+	"adult-content": {
+		"content": "filters",
+		"group": "custom",
+		"off": true,
+		"title": "Adult content",
+		"tags": "adult",
+		"contentURL": "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/porn/hosts",
+		"supportURL": "https://github.com/StevenBlack/hosts"
 	}
 }

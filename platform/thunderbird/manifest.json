@@ -1,11 +1,10 @@
 {
   "browser_specific_settings": {
     "gecko": {
-      "id": "uBlock0@raymondhill.net",
       "strict_min_version": "91.0"
     }
   },
-  "author": "Raymond Hill & contributors",
+  "author": "The Cinder Project",
   "background": {
     "page": "background.html"
   },
@@ -15,7 +14,7 @@
       "16": "img/icon_16.png",
       "32": "img/icon_32.png"
     },
-    "default_title": "uBlock Origin",
+    "default_title": "CinderBlock",
     "default_popup": "popup-fenix.html"
   },
   "content_scripts": [
@@ -33,44 +32,17 @@
       "all_frames": true,
       "match_about_blank": true,
       "run_at": "document_start"
-    },
-    {
-      "matches": [
-        "https://easylist.to/*",
-        "https://*.fanboy.co.nz/*",
-        "https://filterlists.com/*",
-        "https://forums.lanik.us/*",
-        "https://github.com/*",
-        "https://*.github.io/*"
-      ],
-      "js": [
-        "/js/scriptlets/subscriber.js"
-      ],
-      "run_at": "document_idle",
-      "all_frames": false
-    },
-    {
-      "matches": [
-        "https://github.com/uBlockOrigin/*",
-        "https://ublockorigin.github.io/*",
-        "https://*.reddit.com/r/uBlockOrigin/*"
-      ],
-      "js": [
-        "/js/scriptlets/updater.js"
-      ],
-      "run_at": "document_idle",
-      "all_frames": false
     }
   ],
   "default_locale": "en",
   "description": "__MSG_extShortDesc__",
   "icons": {
-    "16": "img/ublock.svg",
-    "48": "img/ublock.svg",
-    "96": "img/ublock.svg"
+    "16": "img/icon_16.png",
+    "48": "img/icon_16.png",
+    "96": "img/icon_16.png"
   },
   "manifest_version": 2,
-  "name": "uBlock Origin",
+  "name": "CinderBlock",
   "options_ui": {
     "page": "dashboard.html",
     "browser_style": false,
@@ -86,9 +58,6 @@
     "webRequestBlocking",
     "<all_urls>"
   ],
-  "short_name": "uBlock₀",
-  "version": "1.9.15.101",
-  "web_accessible_resources": [
-    "/web_accessible_resources/*"
-  ]
+  "short_name": "CinderBlock",
+  "version": "0.1.0"
 }

@@ -1,7 +1,7 @@
 /*******************************************************************************
 
-    uBlock Origin - a comprehensive, efficient content blocker
-    Copyright (C) 2014-2015 The uBlock Origin authors
+    CinderBlock - a content blocking engine for Ember Browser (based on uBlock Origin)
+    Copyright (C) 2014-present The CinderBlock authors (based on uBlock Origin)
     Copyright (C) 2014-present Raymond Hill
 
     This program is free software: you can redistribute it and/or modify

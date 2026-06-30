@@ -1,0 +1,131 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build ${{ matrix.target }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - target: chromium
+            artifact: cinderblock.chromium
+          - target: firefox
+            artifact: cinderblock.firefox
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Get version from tag
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Build ${{ matrix.target }}
+        run: make ${{ matrix.target }} version=${{ env.VERSION }}
+
+      - name: Prepare artifact
+        run: |
+          if [ "${{ matrix.target }}" = "chromium" ]; then
+            ARTIFACT_PATH="dist/build/uBlock0_${{ env.VERSION }}.chromium.zip"
+            DEST_PATH="${{ matrix.artifact }}_${{ env.VERSION }}.zip"
+          else
+            ARTIFACT_PATH="dist/build/uBlock0_${{ env.VERSION }}.firefox.xpi"
+            DEST_PATH="${{ matrix.artifact }}_${{ env.VERSION }}.xpi"
+          fi
+          cp "$ARTIFACT_PATH" "$DEST_PATH"
+          echo "ARTIFACT_PATH=$DEST_PATH" >> $GITHUB_ENV
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: ${{ env.ARTIFACT_PATH }}
+
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get version from tag
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Generate checksums
+        run: |
+          for dir in cinderblock-*/; do
+            sha256sum "$dir"* > "${dir}sha256sums.txt"
+          done
+
+      - name: Determine pre-release
+        id: prerelease
+        run: |
+          if echo "${{ env.VERSION }}" | grep -qE '-(alpha|beta|rc|dev)'; then
+            echo "is_prerelease=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_prerelease=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Assemble release notes
+        run: |
+          > release.body.txt
+          if [ -f CHANGELOG.md ]; then
+            grep -m1 -B10000 -- "----------" CHANGELOG.md >> release.body.txt || true
+          fi
+          cat >> release.body.txt << EOF
+
+          ## Artifacts
+
+          | Platform | File |
+          |----------|------|
+          | Chromium | \`cinderblock.chromium_${{ env.VERSION }}.zip\` |
+          | Firefox | \`cinderblock.firefox_${{ env.VERSION }}.xpi\` |
+
+          ### Installation
+
+          **Chromium:**
+          1. Download \`cinderblock.chromium_${{ env.VERSION }}.zip\`
+          2. Unzip to a folder
+          3. Go to \`chrome://extensions/\` → Enable Developer mode → Load unpacked → Select the folder
+
+          **Firefox:**
+          1. Download \`cinderblock.firefox_${{ env.VERSION }}.xpi\`
+          2. Drag into Firefox (requires \`xpinstall.signatures.required\` set to \`false\` in \`about:config\` for stable builds)
+          EOF
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body_path: release.body.txt
+          prerelease: ${{ steps.prerelease.outputs.is_prerelease }}
+          files: |
+            cinderblock-chromium/cinderblock.chromium_${{ env.VERSION }}.zip
+            cinderblock-chromium/sha256sums.txt
+            cinderblock-firefox/cinderblock.firefox_${{ env.VERSION }}.xpi
+            cinderblock-firefox/sha256sums.txt

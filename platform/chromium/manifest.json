@@ -1,5 +1,5 @@
 {
-  "author": "Raymond Hill & contributors",
+  "author": "The Cinder Project",
   "background": {
     "page": "background.html"
   },
@@ -9,7 +9,7 @@
       "32": "img/icon_32.png",
       "64": "img/icon_64.png"
     },
-    "default_title": "uBlock Origin",
+    "default_title": "CinderBlock",
     "default_popup": "popup-fenix.html"
   },
   "commands": {
@@ -49,33 +49,6 @@
       "all_frames": true,
       "match_about_blank": true,
       "run_at": "document_start"
-    },
-    {
-      "matches": [
-        "https://easylist.to/*",
-        "https://*.fanboy.co.nz/*",
-        "https://filterlists.com/*",
-        "https://forums.lanik.us/*",
-        "https://github.com/*",
-        "https://*.github.io/*"
-      ],
-      "js": [
-        "/js/scriptlets/subscriber.js"
-      ],
-      "run_at": "document_idle",
-      "all_frames": false
-    },
-    {
-      "matches": [
-        "https://github.com/uBlockOrigin/*",
-        "https://ublockorigin.github.io/*",
-        "https://*.reddit.com/r/uBlockOrigin/*"
-      ],
-      "js": [
-        "/js/scriptlets/updater.js"
-      ],
-      "run_at": "document_idle",
-      "all_frames": false
     }
   ],
   "content_security_policy": "script-src 'self'; object-src 'self'",
@@ -90,7 +63,7 @@
   "incognito": "split",
   "manifest_version": 2,
   "minimum_chrome_version": "93.0",
-  "name": "uBlock Origin",
+  "name": "CinderBlock",
   "options_ui": {
     "page": "dashboard.html",
     "open_in_tab": true
@@ -107,12 +80,9 @@
     "webRequestBlocking",
     "<all_urls>"
   ],
-  "short_name": "uBlock₀",
+  "short_name": "CinderBlock",
   "storage": {
     "managed_schema": "managed_storage.json"
   },
-  "version": "1.15.11.0",
-  "web_accessible_resources": [
-    "/web_accessible_resources/*"
-  ]
+  "version": "0.1.0"
 }

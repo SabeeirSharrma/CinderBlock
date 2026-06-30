@@ -1,6 +1,6 @@
 /*******************************************************************************
 
-    uBlock Origin - a comprehensive, efficient content blocker
+    CinderBlock - a content blocking engine for Ember Browser (based on uBlock Origin)
     Copyright (C) 2019-present Raymond Hill
 
     This program is free software: you can redistribute it and/or modify
@@ -155,22 +155,7 @@ if ( chrome.storage.managed instanceof Object ) {
     };
 }
 
-// https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/sync
-if ( chrome.storage.sync instanceof Object ) {
-    webext.storage.sync = {
-        QUOTA_BYTES: chrome.storage.sync.QUOTA_BYTES,
-        QUOTA_BYTES_PER_ITEM: chrome.storage.sync.QUOTA_BYTES_PER_ITEM,
-        MAX_ITEMS: chrome.storage.sync.MAX_ITEMS,
-        MAX_WRITE_OPERATIONS_PER_HOUR: chrome.storage.sync.MAX_WRITE_OPERATIONS_PER_HOUR,
-        MAX_WRITE_OPERATIONS_PER_MINUTE: chrome.storage.sync.MAX_WRITE_OPERATIONS_PER_MINUTE,
-
-        clear: promisify(chrome.storage.sync, 'clear'),
-        get: promisify(chrome.storage.sync, 'get'),
-        getBytesInUse: promisify(chrome.storage.sync, 'getBytesInUse'),
-        remove: promisify(chrome.storage.sync, 'remove'),
-        set: promisify(chrome.storage.sync, 'set'),
-    };
-}
+// CinderBlock: cloud sync removed — storage.local used instead
 
 // https://bugs.chromium.org/p/chromium/issues/detail?id=608854
 if ( chrome.tabs.removeCSS instanceof Function ) {

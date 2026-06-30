@@ -1,6 +1,6 @@
 /*******************************************************************************
 
-    uBlock Origin Lite - a comprehensive, MV3-compliant content blocker
+    CinderBlock MV3 - a content blocking engine for Ember Browser (based on uBlock Origin)
     Copyright (C) 2024-present Raymond Hill
 
     This program is free software: you can redistribute it and/or modify
